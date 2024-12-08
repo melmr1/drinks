@@ -1,4 +1,7 @@
-valid_bases = {'chai', 'milk', 'OJ', 'hazelnut tea'}
+
+class Drink:
+    
+    valid_bases = {'chai', 'milk', 'OJ', 'hazelnut tea'}
     valid_flavors = {'vanilla', 'cocoa', 'coconut', 'mint'}
     size_costs = {
         "small": 1.00,
@@ -6,30 +9,37 @@ valid_bases = {'chai', 'milk', 'OJ', 'hazelnut tea'}
         "large": 3.00,
         "xlarge":4.00,
     }
+
+    #why is size not define?
     def __init__(self):
         """Initialize a Drink with a base and an empty list of flavors."""
         self._base = None
         self._flavors = ()
         self._cost = 0.0
         self._size = None 
-        self.set_size(size)
+        self.set_size
     def get_base(self):
         """Return the base of the drink."""
         return self._base
+
+#setter for base
 
     def get_flavors(self):
         """Return the list of flavors for the drink."""
         return self._flavors
 
+#get number of flavors
     def get_num_flavors(self):
         """Return the number of flavors added to the drink."""
         return len(self._flavors)
 
+
+#get total cost
     def get_total(self):
         return self._cost
 
-
-
+#setter for flavors if not chosen
+#why put else is?
     def set_flavors(self, flavors):
         if len(set(flavors)) != len(flavors):
             raise ValueError("Flavors cannot have duplicates.")
@@ -41,6 +51,8 @@ valid_bases = {'chai', 'milk', 'OJ', 'hazelnut tea'}
             raise ValueError(f"Invalid flavors: {', '.join(invalid_flavors)}")
         
 
+#add valid flavor
+
     def add_flavor(self, flavor):
         if flavor not in Drink.valid_flavors:
             raise ValueError(f"Invalid flavor: {flavor}")
@@ -49,13 +61,42 @@ valid_bases = {'chai', 'milk', 'OJ', 'hazelnut tea'}
             raise ValueError(f"Flavor {flavor} is already added.")
         self._flavors.append(flavor)
 
+#set size
+# understanding problems in the code and how to alter it
     def set_size(self, size):
         size = size.lower()
         if size in self._size_costs: 
             size._size = size
             self._cost = size._size_costs[size] * 15 * len(self._flavors)
         else:
-            raise ValueError(f"Invalid size: {size}. choose a different size from {list{self._size_cost.keys()}}.")
+            raise ValueError(f"Invalid size: {size}. choose a different size from {self._size_cost.keys()}.")
+
+
+class Food:
+
+   _food_price = {
+        "hotdog": 3.30,
+        "nacho chips": 4.00,
+        "ice cream": 1.00,
+        "hamburger": 2.50,
+        "french fries": 2.00,
+        "cotton candy": 1.50,
+        "apple": 1.75,
+   }
+
+   _topping_prices = {
+     "whipped cream": 0.00,
+     "caramel sauce": 0.75,
+     "chocolate sauce": 1.00,
+     "spicy nacho cheese": 1.50,
+     "nacho cheese": 1.00,
+     "chili": 2.00,
+     "ketchup": .50,
+     "BBQ sauce": 1.00,
+     
+
+
+   }
 
 
 class Order:
