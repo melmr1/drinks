@@ -1,0 +1,217 @@
+class Drink:
+    
+    valid_bases = {'chai', 'milk', 'OJ', 'hazelnut tea'}
+    valid_flavors = {'vanilla', 'cocoa', 'coconut', 'mint'}
+    size_costs = {
+        "small": 1.00,
+        "medium": 2.00,
+        "large": 3.00,
+        "xlarge":4.00,
+    }
+
+#why is size not define?
+    def __init__(self):
+        """Initialize a Drink with a base and an empty list of flavors."""
+        self._base = None
+        self._flavors = ()
+        self._cost = 0.0
+        self._size = None 
+        self.set_size
+    def get_base(self):
+        """Return the base of the drink."""
+        return self._base
+
+#setter for base
+
+    def get_flavors(self):
+        """Return the list of flavors for the drink."""
+        return self._flavors
+
+#get number of flavors
+    def get_num_flavors(self):
+        """Return the number of flavors added to the drink."""
+        return len(self._flavors)
+
+
+#get total cost
+    def get_total(self):
+        return self._cost
+
+#setter for flavors if not chosen
+#why put else is?
+    def set_flavors(self, flavors):
+        if len(set(flavors)) != len(flavors):
+            raise ValueError("Flavors cannot have duplicates.")
+            new_flavors = set(flavors) - self._flavors
+            self._cost += .015 * len(new_flavors)
+            self._flavors = set(flavors)
+        else:
+            invalid_flavors = [flavor for flavor in flavors if flavor not in Drink.valid_flavors]
+            raise ValueError(f"Invalid flavors: {', '.join(invalid_flavors)}")
+        
+
+#add valid flavor
+
+    def add_flavor(self, flavor):
+        if flavor not in Drink.valid_flavors:
+            raise ValueError(f"Invalid flavor: {flavor}")
+        if flavor in self._flavors:
+            self._ += 0.15 
+            raise ValueError(f"Flavor {flavor} is already added.")
+        self._flavors.append(flavor)
+
+#set size
+# understanding problems in the code and how to alter it
+    def set_size(self, size):
+        size = size.lower()
+        if size in self._size_costs: 
+            size._size = size
+            self._cost = size._size_costs[size] * 15 * len(self._flavors)
+        else:
+            raise ValueError(f"Invalid size: {size}. choose a different size from {self._size_cost.keys()}.")
+
+
+class Food:
+
+   _food_price = {
+        "hotdog": 3.30,
+        "nacho chips": 4.00,
+        "ice cream": 1.00,
+        "hamburger": 2.50,
+        "french fries": 2.00,
+        "cotton candy": 1.50,
+        "apple": 1.75,
+   }
+
+   _topping_prices = {
+     "whipped cream": 0.00,
+     "caramel sauce": 0.75,
+     "chocolate sauce": 1.00,
+     "spicy nacho cheese": 1.50,
+     "nacho cheese": 1.00,
+     "chili": 2.00,
+     "ketchup": .50,
+     "BBQ sauce": 0.00,
+   }
+
+    def __init__(self,food_type):
+        if food_type.lower() not in self._food_price:
+            raise ValueError(f"Invaild food type.")
+        self._type = food_type.lower
+        self._toppings = set()
+        self._base_price = self._food_price[self._type]
+
+#acccessor for the base price
+    def get_base_price(self):
+       return self._base_price 
+
+#acessor for the base price
+    def get_type(self):
+       return self._type
+   
+#add topping
+    def add_topping(self, topping):
+       if topping.lower() not in self._topping_prices:
+           raise ValueError(f"Invalid topping")
+       self._toppings.add(topping.lower())
+
+#acessor for toppings
+    def get_toppings(self):
+       return list(self.toppings)
+       
+#count number of toppings
+    def get_num_toppings(self):
+       return len(self._toppings)
+   
+    def get_total_price(self):
+        toppings_cost = sum(self._topping_prices[topping] for topping in self._toppings)
+        return self._base_price + toppings_cost
+   
+    def get_base_price(self):
+       return self._base_price 
+
+    _icecream_flavors = {
+        "mint chocolate chip": 4.00,
+        "chocolate": 3.00,
+        "Vanila Bean": 3.00,
+        "Banana": 3.50,
+        "Butter Pecan": 3.50,
+        "S'more": 4.00,
+    }
+
+    _icecream_topping = {
+        "cherry": 0.00,
+        "Carmael": 0.00,
+        "chocolate sauce": 0.00,
+        "storios": 1.00,
+        "Dig Dogs": 1.00,
+        "T&T's": 1.00,
+        "cookie dough": 1.00,
+        "pecans": 0.50,
+
+    }
+   
+
+
+
+class Order:
+
+    _tax_rate = 0.0725
+ # taxrate 
+
+    def __init__(self):
+         """Initialize an empty order."""
+         self._items = []
+
+    def get_items(self):
+        """Return the list of items (drinks) in the order."""
+        return self._items
+
+    def get_total(self):
+        """Calculate and return the total cost of the order. Assuming each drink costs 5 units."""
+        return len(self._items)
+
+    def get_num_items(self):
+        """Return the number of items (drinks) in the order."""
+        return len(self._items)
+
+    def get_total(self):
+        return sum(drink.get_total() for drink in self._item)
+
+    def get_tax(self):
+        return self.get_total() * (1 + self._tax_rate)
+
+    def get_receipt(self):
+        total_cost = 0.0
+        receipt_data = {
+           
+            "number_drinks": self.get_num_items(),
+            "drinks": [],
+            "subtotal": self.get_num_total(),
+            "tax": self.get_total() * self._tax_rate,
+            "grand total": self.get_tax() 
+        }
+
+        for i, drink in enumerate(self._items):
+           drink_data = {
+            "number_drinks": i + 1,
+            "base": drink.get_base(),
+            "size": drink.get_size(),
+            "flavors": drink.get_flavors(),
+            "total_cost": drink.get_total()
+           }
+        receipt_data["drinks"].appeend(drink_data)
+        return receipt_data
+ #add item
+    def add_item(self, item):
+        """Add a drink to the order."""
+        if not isinstance(item, (Drink, item)):
+            raise ValueError("Item must be an instance of Drink.")
+        self._items.append(item)
+
+    def remove_item(self, index):
+        """Remove a drink from the order by its index."""
+        if index <= 0 or index >= len(self._items):
+            raise IndexError("Invalid index.")
+        del self._items[index]
+
