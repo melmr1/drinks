@@ -60,7 +60,7 @@ class Drink:
             raise ValueError(f"Flavor {flavor} is already added.")
         self._flavors.append(flavor)
 
-#set size
+#setter size
 # understanding problems in the code and how to alter it
     def set_size(self, size):
         size = size.lower()
